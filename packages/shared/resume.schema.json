@@ -1,0 +1,158 @@
+{
+  "header": {
+    "name": "Sean Prince Tinashe Huvaya",
+    "email": "shuvaya@mail.yu.edu",
+    "phone": "+1 (347) 759-1641",
+    "website": "https://seanhuvaya.dev",
+    "linkedin": "https://www.linkedin.com/in/seanhuvaya/",
+    "github": "https://github.com/seanhuvaya",
+    "location": "New York, NY, USA",
+    "relocation": "Open to remote & relocation"
+  },
+  "summary": "Data Engineer with a backend engineering foundation and growing expertise in machine learning operations. Experienced in optimizing SQL queries, automating data pipelines, and deploying cloud-native applications with Docker and AWS. Worked across international teams to integrate machine learning models, refactor legacy systems, and build APIs supporting real-time data workflows. Currently pursuing a Master’s in AI and focused on combining data infrastructure, systems thinking, and model deployment to support scalable ML systems in production.",
+  "experience": [
+    {
+      "organization": "Yeshiva University",
+      "location": "New York, NY",
+      "positions": [
+        {
+          "title": "Supplementary Instructor, Introduction to Information Systems",
+          "start_date": "Aug 2024",
+          "end_date": "June 2025",
+          "achievements": [
+            "Provided technical guidance to 30+ students in R programming and statistical data manipulation, reinforcing foundational data concepts used in real-world analytics and engineering workflows.",
+            "Design and lead weekly mentoring sessions on topics such as data cleaning, visualization, and basic SQL, helping students develop practical skills for analyzing structured data.",
+            "Collaborate with course instructors to refine teaching materials and align exercises with industry-relevant tools and concepts, including reproducibility and version control"
+          ]
+        }
+      ]
+    },
+    {
+      "organization": "CGA Technologies",
+      "location": "Cheshire, UK (Remote)",
+      "positions": [
+        {
+          "title": "Software Developer",
+          "start_date": "Oct 2022",
+          "end_date": "Sep 2023",
+          "achievements": [
+            "Optimized MySQL queries within the SCTP backend platform, reducing API latency by over 10% and improving system responsiveness for critical operations.",
+            "Implemented 10+ backend and UI enhancements for SCTP using Java and Vue.js, improving system functionality across financial tracking and case management modules.",
+            "Built and tested 2 reusable Vue.js components, reducing code duplication and streamlining frontend logic for consistent data display.",
+            "Presented development updates to cross-functional teams and contributed to technical planning aligned with program requirements and stakeholder needs."
+          ]
+        }
+      ]
+    },
+    {
+      "organization": "CodeVirtus",
+      "location": "Harare, Zimbabwe",
+      "positions": [
+        {
+          "title": "Backend Developer",
+          "start_date": "Jun 2021",
+          "end_date": "Nov 2022",
+          "achievements": [
+            "Developed and published an NPM package to simplify integration with Pesepay APIs, streamlining developer adoption with an average of 40+ downloads per week.",
+            "Spearheaded the design for automated image processing features for Claro Images, enabling consistent metadata generation and secure asset storage for downstream workflows.",
+            "Customized SpringBoot-based open-source platforms to support diverse data models and system architectures across multiple client environments.",
+            "Collaborated with backend engineers and product stakeholders to diagnose and resolve system-level issues impacting data consistency and platform reliability."
+          ]
+        }
+      ]
+    },
+    {
+      "organization": "Invenico",
+      "location": "Harare, Zimbabwe",
+      "positions": [
+        {
+          "title": "Software Developer",
+          "start_date": "Apr 2019",
+          "end_date": "May 2021",
+          "achievements": [
+            "Redesigned core backend workflows in collaboration with clients and engineers to optimize system functionality and streamline internal data operations.",
+            "Refactored legacy Java code and implemented comprehensive unit testing, increasing test coverage to 72% and significantly reducing production issues.",
+            "Modernized the MyNhaka life assurance portal by improving backend architecture for cleaner data flow and easier maintenance.",
+            "Delivered 3 full-cycle backend systems using Java and SQL, supporting customer records, transactional data, and reporting tools."
+          ]
+        },
+        {
+          "title": "Android Developer",
+          "start_date": "Jun 2018",
+          "end_date": "Mar 2019",
+          "achievements": [
+            "Built secure POS and wallet applications for enterprise clients, enabling mobile payments, receipt printing, and NFC card integration."
+          ]
+        }
+      ]
+    }
+  ],
+  "eduction": [
+    {
+      "university": "Yeshiva University",
+      "major": "Master of Science in Artificial Intelligence",
+      "course_work": [
+        "Machine Learning",
+        "Neural Networks",
+        "Cloud Computing",
+        "Data Science"
+      ],
+      "graduation_date": "Dec 2025"
+    },
+    {
+      "university": "University of Zimbabwe",
+      "major": "B.Sc. Business Studies and Computing Science (Honors)",
+      "course_work": [],
+      "graduation_date": "Dec 2021"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "AWS Certified Solutions Architect - Associate",
+      "date": "Dec 2025"
+    }
+  ],
+  "technical_skills": [
+    {
+      "title": "Languages & Frameworks",
+      "skills": [
+        "Python",
+        "Java",
+        "SQL (PostgreSQL)",
+        "R",
+        "Bash",
+        "SpringBoot"
+      ]
+    },
+    {
+      "title": "Data & ML Tools",
+      "skills": [
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "PyTorch",
+        "Jupyter",
+        "Matplotlib"
+      ]
+    },
+    {
+      "title": "Cloud & Infrastructure",
+      "skills": [
+        "AWS (EC2, S3, Lambda)",
+        "Docker",
+        "REST APIs",
+        "GitHub",
+        "Linux"
+      ]
+    },
+    {
+      "title": "Workflow & Ops",
+      "skills": [
+        "CI/CD",
+        "Containerization",
+        "Data Pipelines",
+        "Agile/SCRUM"
+      ]
+    }
+  ]
+}
