@@ -6,8 +6,11 @@ export function getLatestJobTitle(exp: Experience): string | null {
   if (!exp.positions?.length) return null;
 
   const latest = exp.positions.reduce((latest, current) => {
-    const latestEnd = parseMonthYear(latest.end_date);
-    const currentEnd = parseMonthYear(current.end_date);
+    const latestEnd = parseMonthYear(latest.endDate);
+    const currentEnd = parseMonthYear(current.endDate);
+
+    if (!currentEnd) return current;
+    if (!latestEnd) return latest;
 
     return currentEnd > latestEnd ? current : latest;
   });
