@@ -24,13 +24,15 @@ export default function ExperienceItem({
 
             <p className="font-semibold text-neutral-800">{experience.location} | {companyDateRage}</p>
             <div>
-                {experience.positions.map((position) => (
-                    <div key={position.title}>
-                        { latestTitle != position.title && <h1 className="font-semibold italic text-neutral-800">{position.title}</h1>}
-                        <h2>{position.startDate} — {position.endDate} </h2>
+                {experience.positions.map((position, idx) => (
+                    <div key={`${position.title}-${position.id}`}>
+                        {latestTitle != position.title &&
+                            <h1 className="font-semibold italic text-neutral-800">{position.title}</h1>}
+                        {experience.positions.length > 1 && idx !== 0 &&
+                            <h2>{position.startDate} — {position.endDate} </h2>}
                         <ul className="text-justify list-disc pl-5">
-                            {position.highlights.map((highlight) => (
-                                <li key={highlight}>{highlight}</li>
+                            {(position.highlights ?? []).map((highlight, idx) => (
+                                <li key={`${idx}-${position.id}`}>{highlight}</li>
                             ))}
                         </ul>
                     </div>

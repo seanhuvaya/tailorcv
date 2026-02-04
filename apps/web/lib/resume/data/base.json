@@ -13,13 +13,17 @@
   "summary": "Data Engineer with a backend engineering foundation and growing expertise in machine learning operations. Experienced in optimizing SQL queries, automating data pipelines, and deploying cloud-native applications with Docker and AWS. Worked across international teams to integrate machine learning models, refactor legacy systems, and build APIs supporting real-time data workflows. Currently pursuing a Master’s in AI and focused on combining data infrastructure, systems thinking, and model deployment to support scalable ML systems in production.",
   "experience": [
     {
+      "id": 1,
       "organization": "Yeshiva University",
       "location": "New York, NY",
+      "current": false,
       "positions": [
         {
+          "id": 1,
           "title": "Supplementary Instructor, Introduction to Information Systems",
           "startDate": "Aug 2024",
           "endDate": "June 2025",
+          "current": false,
           "highlights": [
             "Provided technical guidance to 30+ students in R programming and statistical data manipulation, reinforcing foundational data concepts used in real-world analytics and engineering workflows.",
             "Design and lead weekly mentoring sessions on topics such as data cleaning, visualization, and basic SQL, helping students develop practical skills for analyzing structured data.",
@@ -29,13 +33,17 @@
       ]
     },
     {
+      "id": 2,
       "organization": "CGA Technologies",
       "location": "Cheshire, UK (Remote)",
+      "current": false,
       "positions": [
         {
+          "id": 1,
           "title": "Software Developer",
           "startDate": "Oct 2022",
           "endDate": "Sep 2023",
+          "current": false,
           "highlights": [
             "Optimized MySQL queries within the SCTP backend platform, reducing API latency by over 10% and improving system responsiveness for critical operations.",
             "Implemented 10+ backend and UI enhancements for SCTP using Java and Vue.js, improving system functionality across financial tracking and case management modules.",
@@ -46,13 +54,17 @@
       ]
     },
     {
+      "id": 3,
       "organization": "CodeVirtus",
       "location": "Harare, Zimbabwe",
+      "current": false,
       "positions": [
         {
+          "id": 1,
           "title": "Backend Developer",
           "startDate": "Jun 2021",
           "endDate": "Nov 2022",
+          "current": false,
           "highlights": [
             "Developed and published an NPM package to simplify integration with Pesepay APIs, streamlining developer adoption with an average of 40+ downloads per week.",
             "Spearheaded the design for automated image processing features for Claro Images, enabling consistent metadata generation and secure asset storage for downstream workflows.",
@@ -63,13 +75,17 @@
       ]
     },
     {
+      "id": 4,
       "organization": "Invenico",
       "location": "Harare, Zimbabwe",
+      "current": false,
       "positions": [
         {
+          "id": 1,
           "title": "Software Developer",
           "startDate": "Apr 2019",
           "endDate": "May 2021",
+          "current": false,
           "highlights": [
             "Redesigned core backend workflows in collaboration with clients and engineers to optimize system functionality and streamline internal data operations.",
             "Refactored legacy Java code and implemented comprehensive unit testing, increasing test coverage to 72% and significantly reducing production issues.",
@@ -78,9 +94,11 @@
           ]
         },
         {
+          "id": 2,
           "title": "Android Developer",
           "startDate": "Jun 2018",
           "endDate": "Mar 2019",
+          "current": false,
           "highlights": [
             "Built secure POS and wallet applications for enterprise clients, enabling mobile payments, receipt printing, and NFC card integration."
           ]

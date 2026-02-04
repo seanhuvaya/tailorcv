@@ -12,15 +12,19 @@ export const ResumeHeaderSchema = z.object({
 })
 
 export const ResumeExperienceItemPositionSchema = z.object({
+    id: z.number(),
     title: z.string().min(1),
     startDate: z.string().optional(),
     endDate: z.string().optional(),
+    current: z.boolean(),
     highlights: z.array(z.string()).default([])
 })
 
 export const ResumeExperienceItemSchema = z.object({
+    id: z.number(),
     organization: z.string().min(1),
     location: z.string().optional(),
+    current: z.boolean().default(false),
     positions: z.array(ResumeExperienceItemPositionSchema).default([])
 })
 
@@ -48,3 +52,7 @@ export const ResumeSchema = z.object({
 export type Resume = z.infer<typeof ResumeSchema>
 
 export type Experience = z.infer<typeof ResumeExperienceItemSchema>
+
+export type Position = z.infer<typeof ResumeExperienceItemPositionSchema>
+
+export type PersonalInformation = z.infer<typeof ResumeHeaderSchema>

@@ -1,3 +1,5 @@
+"use client"
+
 import type { Resume } from "@/lib/resume/schema";
 import Header from "./sections/Header";
 import Summary from "./sections/Summary";
@@ -12,7 +14,7 @@ export default function ResumeTemplate({
 }) {
   return (
     <main
-      className="mx-auto max-w-[841px] bg-white text-neutral-900 w-full p-4"
+      className="mx-auto max-w-210.25 bg-white text-neutral-900 w-full p-4"
     >
       <div className="space-y-1 w-full">
         <Header data={data.header} />
