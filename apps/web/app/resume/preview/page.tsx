@@ -1,18 +1,20 @@
-import ResumeTemplate from "@/components/resume/ResumeTemplate";
-import { loadResume } from "@/lib/resume/load";
+"use client";
 
-export default async function ResumePreviewPage({
-  searchParams,
-}: {
-  searchParams: { version?: string; print?: string };
-}) {
-  const version = searchParams.version ?? "base";
+import {useEffect, useState} from "react";
+import ResumePreview from "@/components/resume/ResumePreview";
 
-  const resume = await loadResume(version);
+export default function PreviewPage() {
+    const [data, setData] = useState<any>(() =>
+        typeof window !== "undefined" ? window.__RESUME_DATA__ ?? null : null
+    );
 
-  return (
-    <div className="min-h-screen">
-      <ResumeTemplate data={resume} />
-    </div>
-  );
+    useEffect(() => {
+        const handler = () => setData(window.__RESUME_DATA__ ?? null);
+        window.addEventListener("resume-data", handler);
+        return () => window.removeEventListener("resume-data", handler);
+    }, []);
+
+    if (!data) return null;
+
+    return <ResumePreview resume={data}/>;
 }

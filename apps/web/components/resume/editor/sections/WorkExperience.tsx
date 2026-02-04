@@ -1,4 +1,4 @@
-import {Experience, Resume} from "@/lib/resume/schema";
+import {Experience, Position, Resume} from "@/lib/resume/schema";
 import {FaPlus} from "react-icons/fa";
 import WorkExperienceItem from "@/components/resume/editor/sections/WorkExperienceItem";
 
@@ -46,7 +46,7 @@ export default function WorkExperience({resume, onChange}: WorkExperienceProps) 
         })
     };
 
-    const updateWorkExperience = (experienceId: number, key: string, value: any) => {
+    const updateWorkExperience = (experienceId: number, key: string, value: string) => {
         const updatedExperiences = resume.experience.map((exp) => exp.id === experienceId ? {
             ...exp,
             [key]: value
@@ -67,32 +67,20 @@ export default function WorkExperience({resume, onChange}: WorkExperienceProps) 
                 .map(pos => Number(pos.id))
         ) + 1;
 
-        const newExperienceId = Math.max(
-            0,
-            ...resume.experience.map(exp => Number(exp.id))
-        ) + 1;
-
-        const position = {
-            id: newExperienceId,
-            organization: "",
-            location: "",
+        const position: Position = {
+            id: newPositionId,
+            title: "",
+            startDate: "",
+            endDate: "",
             current: false,
-            positions: [
-                {
-                    id: newPositionId,
-                    title: "",
-                    startDate: "",
-                    endDate: "",
-                    current: "",
-                    highlights: []
-                }
-            ]
+            highlights: []
         }
 
-        const updatedExperiences = resume.experience.map((exp) => exp.id === experienceId ? {
-            ...exp,
-            positions: [...exp.positions, position]
-        } : exp)
+        const updatedExperiences = resume.experience
+            .map((exp) => exp.id === experienceId ? {
+                ...exp,
+                positions: [...exp.positions, position]
+            } : exp)
 
         onChange({
             ...resume,
@@ -104,7 +92,7 @@ export default function WorkExperience({resume, onChange}: WorkExperienceProps) 
         experienceId: number,
         positionId: number,
         key: string,
-        value: any
+        value: string
     ) => {
         const updatedExperiences = resume.experience.map((exp) => exp.id === experienceId ? {
             ...exp,
