@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   tailorcv-web:
     container_name: tailorcv-web
@@ -11,3 +9,38 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
+
+  tailorcv-db:
+    image: postgres:16
+    container_name: tailorcv-db
+    environment:
+      POSTGRES_USER: tailorcv
+      POSTGRES_PASSWORD: tailorcv
+      POSTGRES_DB: tailorcv
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U tailorcv -d tailorcv" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  tailorcv-api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: tailorcv-api
+    environment:
+      DATABASE_URL: postgresql+psycopg://tailorcv:tailorcv@tailorcv-db:5432/tailorcv
+      ALLOWED_ORIGINS: http://localhost:3000
+    ports:
+      - "8000:8000"
+    depends_on:
+      tailorcv-db:
+        condition: service_healthy
+    restart: unless-stopped  # Added for resilience
+
+volumes:
+  pgdata:
