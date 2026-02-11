@@ -1,9 +1,9 @@
-import {Experience} from "@/lib/mockApi";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Button} from "@/components/ui/button";
-import {Plus, Trash2} from "lucide-react";
-import {Label} from "@/components/ui/label";
-import {Input} from "@/components/ui/input";
+import { Experience } from "@/lib/types/resume";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Plus, Trash2 } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 interface ExperienceStepProps {
     experiences: Experience[];
@@ -16,14 +16,14 @@ interface ExperienceStepProps {
 }
 
 export function ExperienceStep({
-                                   experiences,
-                                   onAddExperience,
-                                   onRemoveExperience,
-                                   onUpdateExperience,
-                                   onAddExperienceBullet,
-                                   onUpdateExperienceBullet,
-                                   onRemoveExperienceBullet,
-                               }: ExperienceStepProps) {
+    experiences,
+    onAddExperience,
+    onRemoveExperience,
+    onUpdateExperience,
+    onAddExperienceBullet,
+    onUpdateExperienceBullet,
+    onRemoveExperienceBullet,
+}: ExperienceStepProps) {
     return (
         <div className="space-y-6">
             {experiences.map((exp, expIndex) => (
@@ -40,7 +40,7 @@ export function ExperienceStep({
                                     size="sm"
                                     onClick={() => onRemoveExperience(exp.id)}
                                 >
-                                    <Trash2 className="h-4 w-4"/>
+                                    <Trash2 className="h-4 w-4" />
                                 </Button>
                             )}
                         </div>
@@ -58,15 +58,25 @@ export function ExperienceStep({
                                 />
                             </div>
                             <div>
-                                <Label>Position</Label>
+                                <Label>Location</Label>
                                 <Input
-                                    value={exp.position}
+                                    value={exp.location}
                                     onChange={(e) =>
-                                        onUpdateExperience(exp.id, 'position', e.target.value)
+                                        onUpdateExperience(exp.id, 'location', e.target.value)
                                     }
-                                    placeholder="Senior Data Engineer"
+                                    placeholder="New York, NY"
                                 />
                             </div>
+                        </div>
+                        <div>
+                            <Label>Position</Label>
+                            <Input
+                                value={exp.position}
+                                onChange={(e) =>
+                                    onUpdateExperience(exp.id, 'position', e.target.value)
+                                }
+                                placeholder="Senior Data Engineer"
+                            />
                         </div>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
@@ -93,7 +103,7 @@ export function ExperienceStep({
                         </div>
                         <div>
                             <Label>Responsibilities & Achievements</Label>
-                            {exp.description.map((bullet, bulletIndex) => (
+                            {exp.achievements.map((bullet, bulletIndex) => (
                                 <div key={bulletIndex} className="mt-2 flex gap-2">
                                     <Input
                                         value={bullet}
@@ -102,7 +112,7 @@ export function ExperienceStep({
                                         }
                                         placeholder="Built scalable data pipelines processing 1TB+ daily..."
                                     />
-                                    {exp.description.length > 1 && (
+                                    {exp.achievements.length > 1 && (
                                         <Button
                                             type="button"
                                             variant="ghost"
@@ -111,7 +121,7 @@ export function ExperienceStep({
                                                 onRemoveExperienceBullet(exp.id, bulletIndex)
                                             }
                                         >
-                                            <Trash2 className="h-4 w-4"/>
+                                            <Trash2 className="h-4 w-4" />
                                         </Button>
                                     )}
                                 </div>
@@ -123,7 +133,7 @@ export function ExperienceStep({
                                 onClick={() => onAddExperienceBullet(exp.id)}
                                 className="mt-2"
                             >
-                                <Plus className="mr-2 h-4 w-4"/>
+                                <Plus className="mr-2 h-4 w-4" />
                                 Add Bullet Point
                             </Button>
                         </div>
@@ -136,7 +146,7 @@ export function ExperienceStep({
                 onClick={onAddExperience}
                 className="w-full"
             >
-                <Plus className="mr-2 h-4 w-4"/>
+                <Plus className="mr-2 h-4 w-4" />
                 Add Experience
             </Button>
         </div>

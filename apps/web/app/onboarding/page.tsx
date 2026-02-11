@@ -9,7 +9,8 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import PersonalInfoStep from "@/app/onboarding/components/PersonalInfoStep";
 import SummaryStep from "@/app/onboarding/components/SummaryStep";
 import {ExperienceStep} from "@/app/onboarding/components/ExperienceStep";
-import {BaseResume, Certification, Education, Experience, mockApi, Project} from "@/lib/mockApi";
+import {BaseResume, Certification, Education, Experience, Project, Skill} from "@/lib/types/resume";
+import { saveBaseResume } from "@/lib/onboardingService";
 import {EducationStep} from "@/app/onboarding/components/EducationStep";
 import {SkillsStep} from "@/app/onboarding/components/SkillsStep";
 import {Loader2} from "lucide-react";
@@ -57,10 +58,11 @@ export default function OnBoardingPage() {
         {
             id: '1',
             company: '',
+            location: '',
             position: '',
             startDate: '',
             endDate: '',
-            description: [''],
+            achievements: [''],
         },
     ]);
     const [education, setEducation] = useState<Education[]>([
@@ -69,15 +71,21 @@ export default function OnBoardingPage() {
             school: '',
             degree: '',
             field: '',
+            location: '',
             graduationDate: '',
         },
     ]);
-    const [skills, setSkills] = useState<string[]>(['']);
+    const [skills, setSkills] = useState<Skill[]>([
+        {
+            id: '1',
+            skill: '',
+            category: '',
+        },
+    ]);
     const [projects, setProjects] = useState<Project[]>([
         {
             id: '1',
             name: '',
-            description: '',
             highlights: [''],
             githubLink: '',
             websiteLink: '',
@@ -99,10 +107,11 @@ export default function OnBoardingPage() {
             {
                 id: Date.now().toString(),
                 company: '',
+                location: '',
                 position: '',
                 startDate: '',
                 endDate: '',
-                description: [''],
+                achievements: [''],
             },
         ]);
     };
@@ -122,7 +131,7 @@ export default function OnBoardingPage() {
     const addExperienceBullet = (id: string) => {
         setExperiences(
             experiences.map((exp) =>
-                exp.id === id ? {...exp, description: [...exp.description, '']} : exp
+                exp.id === id ? {...exp, achievements: [...exp.achievements, '']} : exp
             )
         );
     };
@@ -133,7 +142,7 @@ export default function OnBoardingPage() {
                 exp.id === expId
                     ? {
                         ...exp,
-                        description: exp.description.map((desc, i) => (i === index ? value : desc)),
+                        achievements: exp.achievements.map((desc, i) => (i === index ? value : desc)),
                     }
                     : exp
             )
@@ -144,7 +153,7 @@ export default function OnBoardingPage() {
         setExperiences(
             experiences.map((exp) =>
                 exp.id === expId
-                    ? {...exp, description: exp.description.filter((_, i) => i !== index)}
+                    ? {...exp, achievements: exp.achievements.filter((_, i) => i !== index)}
                     : exp
             )
         );
@@ -157,6 +166,7 @@ export default function OnBoardingPage() {
                 id: Date.now().toString(),
                 school: '',
                 degree: '',
+                location: '',
                 field: '',
                 graduationDate: '',
             },
@@ -176,11 +186,15 @@ export default function OnBoardingPage() {
     };
 
     const addSkill = () => {
-        setSkills([...skills, '']);
+        setSkills([...skills, {
+            id: Date.now().toString(),
+            skill: '',
+            category: '',
+        }]);
     };
 
-    const updateSkill = (index: number, value: string) => {
-        setSkills(skills.map((skill, i) => (i === index ? value : skill)));
+    const updateSkill = (index: number, field: keyof Skill, value: string) => {
+        setSkills(skills.map((skill, i) => (i === index ? {...skill, [field]: value} : skill)));
     };
 
     const removeSkill = (index: number) => {
@@ -195,7 +209,6 @@ export default function OnBoardingPage() {
             {
                 id: Date.now().toString(),
                 name: '',
-                description: '',
                 highlights: [''],
                 githubLink: '',
                 websiteLink: '',
@@ -298,12 +311,12 @@ export default function OnBoardingPage() {
                 summary,
                 experiences: experiences.filter((exp) => exp.company && exp.position),
                 education: education.filter((edu) => edu.school && edu.degree),
-                skills: skills.filter((skill) => skill.trim() !== ''),
+                skills: skills.filter((skill) => skill.skill && skill.category),
             };
 
             console.log(resume)
 
-            const response = await mockApi.saveBaseResume(resume);
+            const response = await saveBaseResume(resume);
 
             if (response.success) {
                 toast.success(response.message)

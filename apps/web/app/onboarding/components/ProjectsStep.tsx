@@ -6,7 +6,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {Plus, Trash2} from 'lucide-react';
-import type {Project} from '@/lib/mockApi';
+import type {Project} from '@/lib/types/resume';
 
 interface ProjectsStepProps {
     projects: Project[];
@@ -57,18 +57,6 @@ export default function ProjectsStep({
                                     onUpdateProject(project.id, 'name', e.target.value)
                                 }
                                 placeholder="Real-time Analytics Dashboard"
-                            />
-                        </div>
-                        <div>
-                            <Label>Description</Label>
-                            <Textarea
-                                value={project.description}
-                                onChange={(e) =>
-                                    onUpdateProject(project.id, 'description', e.target.value)
-                                }
-                                placeholder="A dashboard for monitoring data pipeline health and key metrics..."
-                                rows={4}
-                                className="mt-2"
                             />
                         </div>
                         <div>

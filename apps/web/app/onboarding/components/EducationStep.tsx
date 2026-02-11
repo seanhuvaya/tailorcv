@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button";
 import {Plus, Trash2} from "lucide-react";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
-import {Education} from "@/lib/mockApi";
+import {Education} from "@/lib/types/resume";
 
 interface EducationStepProps {
     education: Education[];
@@ -48,6 +48,16 @@ export function EducationStep({
                                     onUpdateEducation(edu.id, 'school', e.target.value)
                                 }
                                 placeholder="University of California"
+                            />
+                        </div>
+                        <div>
+                            <Label>Location</Label>
+                            <Input
+                                value={edu.location}
+                                onChange={(e) =>
+                                    onUpdateEducation(edu.id, 'location', e.target.value)
+                                }
+                                placeholder="San Francisco, CA"
                             />
                         </div>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
