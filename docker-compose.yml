@@ -33,14 +33,17 @@ services:
       dockerfile: Dockerfile
     container_name: tailorcv-api
     environment:
-      DATABASE_URL: postgresql+psycopg://tailorcv:tailorcv@tailorcv-db:5432/tailorcv
-      ALLOWED_ORIGINS: http://localhost:3000
+      FRONTEND_URL: http://localhost:3000
+      BACKEND_URL: http://localhost:8000
+      SECRET_KEY: ${SECRET_KEY}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      DATABASE_URL: ${DATABASE_URL}
     ports:
       - "8000:8000"
     depends_on:
-      tailorcv-db:
-        condition: service_healthy
-    restart: unless-stopped  # Added for resilience
+      - tailorcv-db
+    restart: unless-stopped
 
 volumes:
   pgdata:

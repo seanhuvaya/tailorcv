@@ -118,35 +118,3 @@ class Certification(SQLModel, table=True):
     date: str
 
     resume: Resume = Relationship(back_populates="certifications")
-
-from datetime import datetime
-
-from sqlalchemy import Column, JSON
-from sqlmodel import SQLModel, Field
-
-
-class Resume(SQLModel, table=True):
-    __tablename__ = "resumes"
-
-    id: int | None = Field(default=None, primary_key=True)
-
-    # Basic identity / contact
-    full_name: str
-    email: str
-    phone: str
-    location: str | None = None
-    linkedin: str | None = None
-    github: str | None = None
-    website: str | None = None
-
-    # Core resume content
-    summary: str
-
-    experiences: list[dict] | None = Field(default=None, sa_column=Column(JSON))
-    education: list[dict] | None = Field(default=None, sa_column=Column(JSON))
-    skills: list[str] | None = Field(default=None, sa_column=Column(JSON))
-    projects: list[dict] | None = Field(default=None, sa_column=Column(JSON))
-    certifications: list[dict] | None = Field(default=None, sa_column=Column(JSON))
-
-    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
-

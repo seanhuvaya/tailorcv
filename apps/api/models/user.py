@@ -1,7 +1,13 @@
 from sqlmodel import SQLModel, Field
 
+from datetime import datetime
+from typing import Optional
 
 class User(SQLModel, table=True):
     __tablename__ = "users"
     id: int | None = Field(default=None, primary_key=True)
-    full_name: str
+    email: str = Field(unique=True, index=True, nullable=False)
+    name: str = Field(nullable=False)
+    avatar_url: Optional[str] = Field(nullable=True)
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+

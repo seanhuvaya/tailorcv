@@ -32,6 +32,12 @@ RUN --mount=type=cache,target=/home/appuser/.cache/uv,uid=1000,gid=1000 \
 # Copy the rest of the application code
 COPY --chown=appuser:appuser . .
 
+# Copy entrypoint script
+COPY --chown=appuser:appuser entrypoint.sh .
+
+# Make entrypoint executable
+RUN chmod +x entrypoint.sh
+
 # Final sync (installs the project, compiles bytecode)
 RUN --mount=type=cache,target=/home/appuser/.cache/uv,uid=1000,gid=1000 \
     uv sync --frozen --no-dev --compile-bytecode --link-mode=copy
@@ -42,6 +48,8 @@ ENV VIRTUAL_ENV=/app/.venv \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     UV_NO_CACHE=1
+
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 EXPOSE 8000
 

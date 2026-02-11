@@ -1,9 +1,7 @@
 from .config import config
 
-from sqlmodel import SQLModel, Field  # For metadata
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncEngine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
-from models import User
 
 engine = create_async_engine(
     config.DATABASE_URL,
@@ -14,7 +12,6 @@ engine = create_async_engine(
     pool_recycle=1800
 )
 
-# Async session maker (SQLModel recommends using SQLAlchemy's for async)
 AsyncSessionLocal = sessionmaker(
     bind=engine,
     class_=AsyncSession,
@@ -22,15 +19,6 @@ AsyncSessionLocal = sessionmaker(
 )
 
 
-# Startup function to create tables async-safe
-async def create_db_and_tables():
-    async with engine.begin() as conn:
-        # Drop and recreate for dev (optional, comment out for prod)
-        # await conn.run_sync(SQLModel.metadata.drop_all)
-        await conn.run_sync(SQLModel.metadata.create_all)  # Creates tables if missing
-
-
-# Dependency for routes (unchanged, but now works with SQLModel models)
 async def get_db():
     async with AsyncSessionLocal() as session:
         try:

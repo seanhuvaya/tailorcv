@@ -10,7 +10,13 @@ load_dotenv(dotenv_path=dotenv_path)
 
 class Config(BaseSettings):
     DATABASE_URL: str
-    ALLOWED_ORIGINS: str
+    FRONTEND_URL: str
+    BACKEND_URL: str
+    SECRET_KEY: str
+    GOOGLE_CLIENT_ID: str
+    GOOGLE_CLIENT_SECRET: str
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     class Config:
         env_file = ".env"
