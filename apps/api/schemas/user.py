@@ -12,5 +12,6 @@ class UserOut(BaseModel):
     id: int
     email: EmailStr
     name: str
+    is_onboarded: bool
     avatar_url: Optional[str] = None
     created_at: datetime

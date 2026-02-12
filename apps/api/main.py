@@ -38,14 +38,3 @@ app.include_router(prefix="/api/v1", router=auth_router)
 async def healthz():
     return {"status": "ok"}
 
-
-@app.get("/api/v1/debug/auth")
-async def debug_auth(request: Request, token: str | None = Depends(get_token_from_request)):
-    """Temporary: debug what the API receives. Remove in production."""
-    from dependencies.security import COOKIE_ACCESS_TOKEN_KEY
-    auth_header = request.headers.get("authorization") or request.headers.get("Authorization") or ""
-    return {
-        "token_present": token is not None,
-        "cookie_sent": COOKIE_ACCESS_TOKEN_KEY in request.cookies,
-        "authorization_header_prefix": auth_header[:20] + "..." if len(auth_header) > 20 else auth_header or "(empty)",
-    }

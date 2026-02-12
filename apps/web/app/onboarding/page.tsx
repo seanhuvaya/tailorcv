@@ -18,6 +18,7 @@ import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 import ProjectsStep from "@/app/onboarding/components/ProjectsStep";
 import CertificationsStep from "@/app/onboarding/components/CertificationsStep";
+import { useAuth } from "@/hooks/useAuth";
 
 const STEP_TITLES: Record<number, string> = {
     1: 'Personal Information',
@@ -42,6 +43,7 @@ const STEP_DESCRIPTIONS: Record<number, string> = {
 export default function OnBoardingPage() {
 
     const router = useRouter();
+    const { isAuthenticated, status } = useAuth();
     const [step, setStep] = useState(1)
     const [loading, setLoading] = useState(false);
     const [personalInfo, setPersonalInfo] = useState({
@@ -314,13 +316,11 @@ export default function OnBoardingPage() {
                 skills: skills.filter((skill) => skill.skill && skill.category),
             };
 
-            console.log(resume)
-
             const response = await saveBaseResume(resume);
 
             if (response.success) {
                 toast.success(response.message)
-                // router.push('/dashboard');
+                router.push('/dashboard');
             }
         } catch (error) {
             toast.error('Failed to save resume. Please try again.')
@@ -328,6 +328,19 @@ export default function OnBoardingPage() {
             setLoading(false);
         }
     };
+
+    if (status === 'loading') {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <Loader2 className="h-8 w-8 animate-spin text-neutral-400" />
+            </div>
+        );
+    }
+
+    if (!isAuthenticated) {
+        router.push('/auth');
+        return null;
+    }
 
     return (
         <div className="min-h-screen bg-linear-to-br from-neutral-50 to-neutral-100 py-12 px-4">

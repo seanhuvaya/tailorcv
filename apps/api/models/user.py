@@ -8,6 +8,7 @@ class User(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     email: str = Field(unique=True, index=True, nullable=False)
     name: str = Field(nullable=False)
+    is_onboarded: bool = Field(default=False, nullable=False)
     avatar_url: Optional[str] = Field(nullable=True)
     created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
 

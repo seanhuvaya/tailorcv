@@ -10,6 +10,7 @@ export interface MeResponse {
   id: string;
   email: string;
   name: string;
+  is_onboarded: boolean;
   avatar_url: string;
   created_at: string;
 }

@@ -34,6 +34,10 @@ export default function DashboardPage() {
     router.push('/auth');
     return null;
   }
+  if (!user?.is_onboarded) {
+    router.push('/onboarding');
+    return null;
+  }
 
   return (
     <div className="p-6 pb-24 md:pb-6">

@@ -33,4 +33,4 @@ async def authenticate_google(code: str, db: AsyncSession):
     user_data = UserIn(email=user_info["email"], name=user_info["name"], avatar_url=user_info.get("picture"))
     user = await get_or_create_user(db, user_data)
     access_token = create_access_token(data={"sub": user.email})
-    return UserOut(id=user.id, email=user.email, name=user.name, avatar_url=user.avatar_url, created_at=user.created_at), access_token
+    return UserOut(id=user.id, email=user.email, name=user.name, is_onboarded=user.is_onboarded, avatar_url=user.avatar_url, created_at=user.created_at), access_token

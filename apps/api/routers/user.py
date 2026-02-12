@@ -11,6 +11,7 @@ async def get_me(current_user: User = Depends(get_current_user)) -> UserOut:
         id=current_user.id,
         email=current_user.email,
         name=current_user.name,
+        is_onboarded=current_user.is_onboarded,
         avatar_url=current_user.avatar_url,
         created_at=current_user.created_at
     )
