@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 from fastapi import APIRouter, Depends, HTTPException, Response, Request
 from fastapi.responses import RedirectResponse
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -44,14 +46,24 @@ async def google_callback(
     
     user, access_token = await authenticate_google(code=code, db=db)
 
-    redirect = RedirectResponse(config.FRONTEND_URL)
+    # Redirect to frontend: token in URL (for sessionStorage) and in cookie (for API requests).
+    encoded_token = quote(access_token, safe="")
+    callback_url = f"{config.FRONTEND_URL}/auth/callback?access_token={encoded_token}"
+    redirect = RedirectResponse(url=callback_url)
     redirect.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=False,  # secure=True in prod
         max_age=1800,
+        path="/",
         samesite="lax",
+        secure=False,
     )
     redirect.delete_cookie("oauth_state")
+    return redirect
+
+@router.get("/logout")
+async def logout() -> Response:
+    redirect = RedirectResponse(f"{config.FRONTEND_URL}")
+    redirect.delete_cookie("access_token")
     return redirect

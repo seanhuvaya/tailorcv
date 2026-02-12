@@ -1,12 +1,12 @@
-// apps/web/hooks/useAuth.ts
 'use client';
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useApi } from './useApi';
+import { getStoredToken } from '@/lib/authToken';
 
 type AuthStatus = 'loading' | 'authenticated' | 'unauthenticated';
 
-interface MeResponse {
+export interface MeResponse {
   id: string;
   email: string;
   name: string;
@@ -14,9 +14,8 @@ interface MeResponse {
   created_at: string;
 }
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
-
 export function useAuth() {
+  const api = useApi();
   const [user, setUser] = useState<MeResponse | null>(null);
   const [status, setStatus] = useState<AuthStatus>('loading');
 
@@ -24,10 +23,13 @@ export function useAuth() {
     let cancelled = false;
 
     const fetchUser = async () => {
+      if (!getStoredToken()) {
+        setUser(null);
+        setStatus('unauthenticated');
+        return;
+      }
       try {
-        const res = await axios.get<MeResponse>(`${API_BASE}/api/v1/users/me`, {
-          withCredentials: true, // sends HTTP-only access_token cookie
-        });
+        const res = await api.get<MeResponse>('/users/me');
         if (cancelled) return;
         setUser(res.data);
         setStatus('authenticated');
@@ -42,7 +44,7 @@ export function useAuth() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [api]);
 
   return {
     user,
